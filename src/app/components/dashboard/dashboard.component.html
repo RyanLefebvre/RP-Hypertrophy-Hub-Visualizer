@@ -1,0 +1,52 @@
+<div class="container">
+    <mat-card>
+        <div class="pageTitleHolder">
+            <h2 class="tableHeader">Hypertrophy Training Landmarks</h2>
+            <button (click)="openShareDialog()" class="rpHoverText shareButton">
+                Share<mat-icon>share</mat-icon>
+            </button>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="tableDescription">
+            Click on a row in the table to view the in-depth recommendations for that muscle group
+        </div>
+    </mat-card>
+    <div class="landmarkTable">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="Muscle">
+                <th mat-header-cell *matHeaderCellDef> Muscle </th>
+                <td mat-cell *matCellDef="let muscleGroup" class="rpThemeText boldText"> {{muscleGroup.Muscle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="MV">
+                <th mat-header-cell *matHeaderCellDef> MV </th>
+                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.MV}} </td>
+            </ng-container>
+            <ng-container matColumnDef="MEV">
+                <th mat-header-cell *matHeaderCellDef> MEV </th>
+                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.MEV}} </td>
+            </ng-container>
+            <ng-container matColumnDef="MAV">
+                <th mat-header-cell *matHeaderCellDef> MAV </th>
+                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.MAV}} </td>
+            </ng-container>
+            <ng-container matColumnDef="MRV">
+                <th mat-header-cell *matHeaderCellDef> MRV </th>
+                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.MRV}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Freq">
+                <th mat-header-cell *matHeaderCellDef> Freq </th>
+                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.MRV}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Reps">
+                <th mat-header-cell *matHeaderCellDef> Reps </th>
+                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.Reps}} </td>
+            </ng-container>
+            <ng-container matColumnDef="RIR">
+                <th mat-header-cell *matHeaderCellDef> RIR </th>
+                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.RIR}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

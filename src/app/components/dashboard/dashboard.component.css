@@ -1,0 +1,51 @@
+.container{
+    max-width:1200px;
+    min-width:300px;
+    width:95%;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top: 10px;
+    display: block;
+}
+
+.tableDescription, .tableHeader{
+    margin:0;
+    padding:10px;
+}
+
+.landmarkTable table{
+    margin-top:10px;
+    width:100%;
+    border-radius: 4px;
+    border-style: solid;
+    border-width:4px;
+    border-color: white;
+}
+
+.boldText{
+    font-weight:bold;
+}
+
+th.mat-header-cell, td.mat-cell{
+    text-align:center;
+}
+
+.pageTitleHolder{
+    display:flex;
+    align-items: center;
+    justify-content:space-between
+}
+
+.shareButton{
+    border-width:0px;
+    background-color:white;
+    color:#c0c0c0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.shareButton:hover{
+    cursor:pointer;
+}

@@ -1,0 +1,31 @@
+html, body { height: 100%; }
+
+:root {
+    --background1: #223344;
+    --background: #090a0f;
+    --rp-color:#ee2d37;
+    --hover-accent:#c0c0c0;
+}
+
+.rpBackgroundColor{
+    background-color:var(--rp-color);
+}
+
+.rpThemeText{
+    color:var(--rp-color);
+}
+
+.rpHoverText:hover{
+    color:var(--rp-color) !important;
+}
+
+.hoverAccent:hover{
+    color:var(--hover-accent);
+}
+
+body { 
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+    padding: 0;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at bottom, var(--background1) 0%, var(--background) 100%);
+}
