@@ -1,31 +1,95 @@
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
 :root {
-    --background1: #223344;
-    --background: #090a0f;
-    --rp-color:#ee2d37;
-    --hover-accent:#c0c0c0;
+  --background1: #223344;
+  --background: #090a0f;
+  --rp-color: #ee2d37;
+  --hover-accent: #c0c0c0;
 }
 
-.rpBackgroundColor{
-    background-color:var(--rp-color);
+.rpBackgroundColor {
+  background-color: var(--rp-color);
 }
 
-.rpThemeText{
-    color:var(--rp-color);
+.rpThemeText {
+  color: var(--rp-color);
 }
 
-.rpHoverText:hover{
-    color:var(--rp-color) !important;
+.rpHoverText:hover {
+  color: var(--rp-color) !important;
 }
 
-.hoverAccent:hover{
-    color:var(--hover-accent);
+.hoverAccent:hover {
+  color: var(--hover-accent);
 }
 
-body { 
-    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
-    padding: 0;
-    min-height: 100vh;
-    background: radial-gradient(ellipse at bottom, var(--background1) 0%, var(--background) 100%);
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, "Helvetica Neue", sans-serif;
+  padding: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, var(--background1) 0%, var(--background) 100%);
+}
+
+/*////////////////////////////////// Button Group ////////////////////////////////////////// */
+
+/* BUTTONGROUP PATTERN IS AS FOLLOWS:
+            <button class="buttonGroupButton" mat-raised-button>
+              <div class='buttonFlexManager' fxLayout="row">
+                <div class='buttonIconWrapper'>
+                  <mat-icon> ICON </mat-icon>
+                </div>
+                <div class='buttonTextWrapper'>
+                  &nbsp; BUTTON TEXT
+                </div>
+              </div>
+            </button>
+ */
+
+.buttonGroup {
+  width: 220px;
+  display: block;
+  margin: auto;
+}
+
+.buttonGroup .buttonGroupButton {
+  width: 100%;
+  margin-top: 2.5%;
+  display: flex;
+}
+
+.halfButtonWrapper.buttonGroupButton {
+  width: 100%;
+  margin-top: 2.5%;
+  display: flex;
+}
+
+.buttonGroup .buttonIconWrapper mat-icon {
+  vertical-align: middle;
+}
+
+.mat-button-wrapper {
+  width: 100% !important;
+}
+
+.buttonGroup .buttonTextWrapper {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.buttonFlexManager {
+  width: 100%;
+}
+
+.blueButton {
+  color: white;
+  background-color: #4286f4;
+}
+
+.blueButton:hover {
+  background: #21457f;
 }

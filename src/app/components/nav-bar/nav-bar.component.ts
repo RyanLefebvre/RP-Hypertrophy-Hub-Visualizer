@@ -15,8 +15,13 @@ export class NavBarComponent implements OnInit {
   }
 
   openAboutDialog() {
-    const dialogRef = this.dialog.open(AboutDialogComponent);
-
+    const options = {
+      width: '95%',
+      maxWidth: '575px',
+      minWidth: '290px',
+      maxHeight: '550px'
+    }
+    const dialogRef = this.dialog.open(AboutDialogComponent, options);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

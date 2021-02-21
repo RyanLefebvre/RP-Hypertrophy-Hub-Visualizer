@@ -120,7 +120,7 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-6 x Week",
     "Reps": "8-20",
     "RIR": "0-2"
-  },
+  }
 ];
 
 @Component({
@@ -139,8 +139,13 @@ export class DashboardComponent implements OnInit {
   }
 
   openShareDialog() {
-    const dialogRef = this.dialog.open(ShareDialogComponent);
-
+    const options = {
+      width: '95%',
+      maxWidth: '575px',
+      minWidth: '290px',
+      maxHeight: '550px'
+    }
+    const dialogRef = this.dialog.open(ShareDialogComponent, options);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

@@ -1,1 +1,34 @@
-<p>about-dialog works!</p>
+<div class="wrapper">
+    <div class='header'>
+        <div class='headerTitle'>
+            <mat-icon class='rpThemeText'>perm_identity</mat-icon>
+            <div >About&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="profilePicture">
+        <img src="./assets/profile.jpg" alt="Profile Picture">
+    </div>
+    <div class="bio">
+        My names Ryan. I'm a full stack software developer who is passionate about training and nutrition. If you want
+        to see other projects I am involved with or connect with me, check out my  <a href="https://ryanlefebvre.github.io/TREE/" target="_blank">link tree</a> :)
+    </div>
+    <div class="bio">
+        I made this page to summarize the <a href="https://renaissanceperiodization.com/" target="_blank">Renaissance Periodization</a> (RP)
+        hypertrophy training volume recommendations. I'll refer people to their <a href="https://renaissanceperiodization.com/hypertrophy-training-guide-central-hub/" target="_blank">hypertrophy training hub</a> 
+        pretty often and one thing I'll always hear back is that people wish there was a table of all the volume landmarks in one spot.
+    </div>
+    <div class="bio">
+        That is what inspired me to make an easier way to visualize the landmarks myself.
+        I want to make it clear that I am not affiliated with RP and take no credit for their work.  
+    </div>
+    <div class="buttonGroup">
+        <button mat-raised-button (click)="this.dialog.close()" class="blueButton buttonGroupButton" >
+            <div class='buttonFlexManager' fxLayout="row">
+                <div class='buttonTextWrapper'>
+                    &nbsp; CLOSE&nbsp;&nbsp;
+                </div>
+            </div>
+        </button>
+    </div>
+</div>
