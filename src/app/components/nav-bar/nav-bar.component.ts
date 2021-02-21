@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AboutDialogComponent } from '../about-dialog/about-dialog.component';
 
+/**
+ * Project nav bar. Contains only one link with a button to my about page.
+ */
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -9,21 +12,25 @@ import { AboutDialogComponent } from '../about-dialog/about-dialog.component';
 })
 export class NavBarComponent implements OnInit {
 
+  /**
+   * @ignore
+   */
   constructor(public dialog: MatDialog) { }
 
-  ngOnInit() {
-  }
+  /**
+   * @ignore
+   */
+  ngOnInit() { }
 
-  openAboutDialog() {
-    const options = {
+  /**
+   * Opens the about me dialog.
+   */
+  openAboutDialog(): void {
+    this.dialog.open(AboutDialogComponent, {
       width: '95%',
       maxWidth: '575px',
       minWidth: '290px',
       maxHeight: '550px'
-    }
-    const dialogRef = this.dialog.open(AboutDialogComponent, options);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 

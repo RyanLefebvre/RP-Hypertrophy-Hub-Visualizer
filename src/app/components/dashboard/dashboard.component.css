@@ -13,6 +13,11 @@
     padding:10px;
 }
 
+.tableDescription{
+    width:90%;
+    margin:auto;
+}
+
 .landmarkTable table{
     margin-top:10px;
     width:100%;
@@ -48,4 +53,11 @@ th.mat-header-cell, td.mat-cell{
 
 .shareButton:hover{
     cursor:pointer;
+}
+
+.disclaimer{
+    margin-top:20px;
+    color:white;
+    font-size:small;
+    text-align:center;
 }

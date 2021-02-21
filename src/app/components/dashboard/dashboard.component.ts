@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModuleFactoryLoader, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
@@ -14,7 +14,7 @@ export interface VolumeLandmark {
   "Freq": string,
   "Reps": string,
   "RIR": string
-}
+};
 
 /**
  * List of objects representing the muscle group specific
@@ -123,6 +123,11 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
   }
 ];
 
+/**
+ * Main display for the web application. Contains a grid with a list 
+ * of all the muscle group landmark objects. When an object is clicked
+ * on, it opens a display with in-depth recomendations for the landmarks.
+ */
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -130,24 +135,40 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
 })
 export class DashboardComponent implements OnInit {
 
+  /**
+   * Columns displayed by the hypertrophy training landmarks.
+   */
   displayedColumns: string[] = ["Muscle", 'MV', 'MEV', 'MAV', 'MRV', "Freq", "Reps", "RIR"];
+
+  /**
+   * Rows displayed by hypetrophy training landmarks.
+   */
   dataSource: VolumeLandmark[] = VOLUME_LANDMARKS;
 
+  /**
+   * Contains the selected muscle group. Null if no muscle group is selected.
+   */
+  selectedMuscleGroup: VolumeLandmark | null = null;
+
+  /**
+   * @ignore 
+   */
   constructor(public dialog: MatDialog) { }
 
-  ngOnInit() {
-  }
+  /**
+   * @ignore
+   */
+  ngOnInit() { }
 
-  openShareDialog() {
-    const options = {
+  /**
+   * Opens a dialog that allows users to share the current URL.
+   */
+  openShareDialog(): void {
+    this.dialog.open(ShareDialogComponent, {
       width: '95%',
       maxWidth: '575px',
       minWidth: '290px',
       maxHeight: '550px'
-    }
-    const dialogRef = this.dialog.open(ShareDialogComponent, options);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
