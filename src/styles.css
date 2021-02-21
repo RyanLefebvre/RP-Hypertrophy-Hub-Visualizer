@@ -93,3 +93,12 @@ body {
 .blueButton:hover {
   background: #21457f;
 }
+
+.greenButton {
+  color: white;
+  background: #31bf49;
+}
+
+.greenButton:hover {
+  background-color: #1f7c2e;
+}

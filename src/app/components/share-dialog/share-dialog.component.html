@@ -1,1 +1,26 @@
-<p>share-dialog works!</p>
+<div class="wrapper">
+    <div class='header'>
+        <div class='headerTitle'>
+            <mat-icon class='rpThemeText'>share</mat-icon>
+            <div >Share&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="urlHolder" id="hypertrophyURL">{{getFullUrl()}}</div>
+    <div class="buttonGroup">
+        <button mat-raised-button class="greenButton buttonGroupButton" (click)="copyToClipboard()">
+            <div class='buttonFlexManager' fxLayout="row">
+                <div class='buttonTextWrapper'>
+                    &nbsp; COPY URL&nbsp;&nbsp;
+                </div>
+            </div>
+        </button>
+        <button mat-raised-button (click)="this.dialog.close()" class="blueButton buttonGroupButton" >
+            <div class='buttonFlexManager' fxLayout="row">
+                <div class='buttonTextWrapper'>
+                    &nbsp; CLOSE&nbsp;&nbsp;
+                </div>
+            </div>
+        </button>
+    </div>
+</div>
