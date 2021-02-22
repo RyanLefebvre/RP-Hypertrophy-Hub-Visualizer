@@ -43,9 +43,6 @@
 
 .urlHolder {
   width: 90%;
-  overflow-x: hidden;
-  white-space: nowrap;
-  font-weight: bold;
   display: block;
   margin: auto;
   text-align: center;

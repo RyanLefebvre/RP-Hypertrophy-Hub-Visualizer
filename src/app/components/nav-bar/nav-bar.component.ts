@@ -30,7 +30,6 @@ export class NavBarComponent implements OnInit {
       width: '95%',
       maxWidth: '575px',
       minWidth: '290px',
-      maxHeight: '550px'
     });
   }
 
