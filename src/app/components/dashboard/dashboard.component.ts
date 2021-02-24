@@ -1,4 +1,4 @@
-import { Component, NgModuleFactoryLoader, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
@@ -169,6 +169,13 @@ export class DashboardComponent implements OnInit {
       maxWidth: '575px',
       minWidth: '290px',
     });
+  }
+
+  /**
+   * Handles clicking on a row in the hypertrophy table.
+   */
+  handleRowClick(muscleGroup: VolumeLandmark): void {
+    console.log(muscleGroup);
   }
 
 }

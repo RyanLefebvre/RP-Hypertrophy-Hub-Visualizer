@@ -18,13 +18,23 @@
     margin:auto;
 }
 
-.landmarkTable table{
-    margin-top:10px;
-    width:100%;
+.landmarkTable{
+    width:97.5%;
+    margin:auto;
+    overflow:auto;
     border-radius: 4px;
-    border-style: solid;
     border-width:4px;
-    border-color: white;
+    border-style: solid;
+    border-color:white;
+    margin-top:10px;
+    background-color:white;
+
+}
+
+.landmarkTable table{
+    width:100%;
+    border-style: solid;
+    border-width: 0px;
 }
 
 .boldText{
@@ -61,4 +71,17 @@ th.mat-header-cell, td.mat-cell{
     color:white;
     font-size:small;
     text-align:center;
+}
+
+th{
+    min-width:50px;
+}
+
+.mat-row:hover{
+    background-color:rgb(224, 224, 224);
+    cursor:pointer;
+}
+
+.mat-row:hover td{
+    color:var(--rp-color);
 }
