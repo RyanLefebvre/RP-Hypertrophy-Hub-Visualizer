@@ -206,11 +206,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
    */
   navigateTo(muscleGroup: VolumeLandmark) {
     const origin: string = (window.location.origin);
-    let muscleName: string = "";
-    if (muscleGroup) {
-      muscleName = muscleGroup.Muscle
+    const isLocalHost: boolean = origin.includes("localhost");
+    let musclePath: string = "";
+    if (!isLocalHost) {
+      musclePath += ("/RP-Hypertrophy-Hub-Visualizer");
     }
-    const fullRoutePath: string = (origin + "/#/" + muscleName);
+    musclePath += ("/#/");
+    if (muscleGroup) {
+      musclePath += muscleGroup.Muscle
+    }
+    const fullRoutePath: string = (origin + musclePath);
     window.location.href = fullRoutePath;
   }
 
