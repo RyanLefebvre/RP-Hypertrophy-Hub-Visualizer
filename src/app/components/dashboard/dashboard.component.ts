@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
 /**
@@ -133,7 +135,7 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   /**
    * Columns displayed by the hypertrophy training landmarks.
@@ -146,19 +148,40 @@ export class DashboardComponent implements OnInit {
   dataSource: VolumeLandmark[] = VOLUME_LANDMARKS;
 
   /**
+  * Used as a constant mean no muscle group selected.
+  */
+  NO_MUSCLE_GROUP: null = null;
+
+  /**
    * Contains the selected muscle group. Null if no muscle group is selected.
    */
-  selectedMuscleGroup: VolumeLandmark | null = null;
+  selectedMuscleGroup: VolumeLandmark | null = this.NO_MUSCLE_GROUP;
+
+  /**
+   * Reference to the query param subscription.
+   */
+  queryParamSubscriptionRef: Subscription = null;
 
   /**
    * @ignore 
    */
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public router: Router) { }
 
   /**
-   * @ignore
-   */
-  ngOnInit() { }
+  * Creates subscription.
+  */
+  ngOnInit() {
+    this.queryParamSubscriptionRef = this.routeChangeSubscription();
+  }
+
+  /**
+  * Destroys subscriptions if they exist.
+  */
+  ngOnDestroy() {
+    if (this.queryParamSubscriptionRef) {
+      this.queryParamSubscriptionRef.unsubscribe();
+    }
+  }
 
   /**
    * Opens a dialog that allows users to share the current URL.
@@ -172,10 +195,88 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * Handles clicking on a row in the hypertrophy table.
+   * Appends the name of a muscle group to the current URL to 
+   * trigger a route change event. If the muscle group provided
+   * is a valid muscle group then the route change subscription
+   * will take the user to the correct display for that group.
+   * If no muscle group is provided, then the user is navigated 
+   * back to the dashboard.
+   * 
+   * @param muscleGroup Muscle group to navigate to the in depth display for.
    */
-  handleRowClick(muscleGroup: VolumeLandmark): void {
-    console.log(muscleGroup);
+  navigateTo(muscleGroup: VolumeLandmark) {
+    const origin: string = (window.location.origin);
+    let muscleName: string = "";
+    if (muscleGroup) {
+      muscleName = muscleGroup.Muscle
+    }
+    const fullRoutePath: string = (origin + "/#/" + muscleName);
+    window.location.href = fullRoutePath;
+  }
+
+  /**
+   * Handles clicking on a row in the hypertrophy table.
+   * Sets the activated muscle group to the one that was
+   * just clicked on in the table.
+   * 
+   * @param muscleGroup Muscle group to navigate to the in depth display for.
+   */
+  setSelectedMuscleGroup(muscleGroup: VolumeLandmark): void {
+    this.selectedMuscleGroup = muscleGroup;
+    this.dataSource = [muscleGroup];
+  }
+
+  /**
+   * Returns true if there is no muscle group selected. False otherwise.
+   */
+  noMuscleGroupSelected(): boolean {
+    return (this.selectedMuscleGroup == this.NO_MUSCLE_GROUP);
+  }
+
+  /**
+   * Returns the user to the original dashboard they saw when the
+   * web app is loaded with the default route and no path indicating
+   * a selected muscle group.
+   */
+  goBackToDashBoard(): void {
+    this.dataSource = VOLUME_LANDMARKS;
+    this.selectedMuscleGroup = this.NO_MUSCLE_GROUP;
+    this.navigateTo(this.NO_MUSCLE_GROUP);
+  }
+
+  /**
+   * Listens to the activated route for any changes.
+   * If the route is changed, then the volume landmarks are 
+   * checked to see if a path is added that corresponds
+   * to one of the muscle groups. If one exists, then that 
+   * muscle group is selected. If one does not exist, then the 
+   * user is sent back to the dashboard.
+   * 
+   * Returns the subscription object so it can be unsubscribed
+   * from in the ngOnDestroy() block.
+   * 
+   * If any error occurs while loading a display for a route, then
+   * the error is caught and the user is returned to the dashboard.
+   */
+  routeChangeSubscription(): Subscription {
+    return this.router.events.subscribe((routerEvent: any) => {
+      try {
+        const isValidEvent: boolean = (routerEvent != null && routerEvent instanceof NavigationEnd);
+        if (isValidEvent) {
+          const url: string = routerEvent.url;
+          const muscleGroupObject: VolumeLandmark = VOLUME_LANDMARKS.find((muscleGroup: VolumeLandmark) => {
+            const requestedMuscleExists: boolean = (url.toLowerCase().includes(muscleGroup.Muscle.toLowerCase()))
+            return requestedMuscleExists;
+          });
+          if (muscleGroupObject) {
+            this.setSelectedMuscleGroup(muscleGroupObject)
+          }
+        }
+      }
+      catch (error) {
+        this.goBackToDashBoard();
+      }
+    });
   }
 
 }

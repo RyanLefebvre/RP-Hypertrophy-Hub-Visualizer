@@ -82,6 +82,7 @@ th{
     cursor:pointer;
 }
 
-.mat-row:hover td{
+.mat-row:hover td, .rpHoverColor:hover{
     color:var(--rp-color);
+    cursor:pointer;
 }
