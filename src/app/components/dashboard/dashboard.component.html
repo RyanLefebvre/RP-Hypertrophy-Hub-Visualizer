@@ -3,24 +3,27 @@
         <div class="pageTitleHolder">
             <h2 class="tableHeader" *ngIf="noMuscleGroupSelected()">Hypertrophy Training Landmarks</h2>
             <h2 class="tableHeader" *ngIf="!(noMuscleGroupSelected())">
-                <mat-icon class="rpHoverColor" (click)="goBackToDashBoard()">keyboard_backspace</mat-icon>
+                <mat-icon class="rpHoverColor greyColor" (click)="goBackToDashBoard()">keyboard_backspace</mat-icon>
                 &nbsp;{{this.selectedMuscleGroup.Muscle}}
                 Training Landmarks
             </h2>
-            <button (click)="openShareDialog()" class="rpHoverText shareButton">
+            <button (click)="openShareDialog()" class="rpHoverText shareButton greyColor">
                 Share<mat-icon>share</mat-icon>
             </button>
         </div>
         <mat-divider></mat-divider>
-        <div class="tableDescription">
+        <div class="tableDescription" *ngIf="noMuscleGroupSelected()">
             If you're not familiar with the volume landmarks, read this
             <a href="https://renaissanceperiodization.com/training-volume-landmarks-muscle-growth/" target="_blank"
                 class="rpThemeText">article</a>,
             otherwise this tool wont make sense. Click on a row in the table to view the in-depth recommendations for
             that muscle group.
         </div>
+        <div class="tableDescription" *ngIf="!noMuscleGroupSelected()">
+            Here is a link to more detailed recommendations: <a href="{{this.selectedMuscleGroup.url}}" target="_blank">{{this.selectedMuscleGroup.Muscle}} Training Guide</a>
+        </div>
     </mat-card>
-    <div class="landmarkTable">
+    <div class="landmarkTable" [ngClass]="{'allowHighlightIfNoSelected':noMuscleGroupSelected()}">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="Muscle">
                 <th mat-header-cell *matHeaderCellDef> Muscle </th>
@@ -58,6 +61,22 @@
             <tr mat-row *matRowDef="let muscleGroup; columns: displayedColumns;" (click)="navigateTo(muscleGroup)">
             </tr>
         </table>
+    </div>
+    <div *ngIf="!noMuscleGroupSelected()" class="flexManager">
+        <mat-card class="graphContainer">
+            <canvas
+            baseChart
+            [chartType]="'line'"
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [legend]="true"
+            (chartClick)="onChartClick($event)">
+            </canvas>
+        </mat-card>
+        <mat-card class="exercises">
+            myExercises
+        </mat-card>
     </div>
     <div class="disclaimer">
         I am not affiliated with <a href="https://renaissanceperiodization.com/" target="_blank"

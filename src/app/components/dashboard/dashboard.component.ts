@@ -15,7 +15,8 @@ export interface VolumeLandmark {
   'MRV': string,
   "Freq": string,
   "Reps": string,
-  "RIR": string
+  "RIR": string,
+  "url": string
 };
 
 /**
@@ -31,7 +32,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "25+",
     "Freq": "2-4 x Week",
     "Reps": "4-20",
-    "RIR": "1-3"
+    "RIR": "1-3",
+    "url": "https://renaissanceperiodization.com/back-training-tips-hypertrophy/"
   },
   {
     "Muscle": "Quads",
@@ -41,7 +43,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "20+",
     "Freq": "1-3 x Week",
     "Reps": "6-20",
-    "RIR": "1-3"
+    "RIR": "1-3",
+    "url": "https://renaissanceperiodization.com/expert-advice/quad-size-training-tips"
   },
   {
     "Muscle": "Hamstrings",
@@ -51,7 +54,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "20+",
     "Freq": "2-3 x Week",
     "Reps": "6-20",
-    "RIR": "1-3"
+    "RIR": "1-3",
+    "url": "https://renaissanceperiodization.com/expert-advice/hamstring-size-training-tips"
   },
   {
     "Muscle": "Glutes",
@@ -61,7 +65,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "16+",
     "Freq": "2-3 x Week",
     "Reps": "6-20",
-    "RIR": "1-3"
+    "RIR": "1-3",
+    "url": "https://renaissanceperiodization.com/glute-training-tips-hypertrophy/"
   },
   {
     "Muscle": "Chest",
@@ -71,17 +76,41 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "22+",
     "Freq": "2-4 x Week",
     "Reps": "4-20",
-    "RIR": "1-3"
+    "RIR": "1-3",
+    "url": "https://renaissanceperiodization.com/chest-training-tips-hypertrophy/"
   },
   {
-    "Muscle": "Delts",
+    "Muscle": "Front-Delts",
     'MV': "0-6",
     'MEV': "6-8",
     'MAV': "16-22",
     'MRV': "26+",
     "Freq": "2-6 x Week",
     "Reps": "8-20",
-    "RIR": "0-2"
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/front-delt-training-tips-hypertrophy/"
+  },
+  {
+    "Muscle": "Side-Delts",
+    'MV': "0-6",
+    'MEV': "6-8",
+    'MAV': "16-22",
+    'MRV': "26+",
+    "Freq": "2-6 x Week",
+    "Reps": "8-20",
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/expert-advice/side-delt-size-training-tips"
+  },
+  {
+    "Muscle": "Rear-Delts",
+    'MV': "0-6",
+    'MEV': "6-8",
+    'MAV': "16-22",
+    'MRV': "26+",
+    "Freq": "2-6 x Week",
+    "Reps": "8-20",
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/expert-advice/rear-delt-size-training-tips"
   },
   {
     "Muscle": "Biceps",
@@ -91,7 +120,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "26+",
     "Freq": "2-6 x Week",
     "Reps": "8-15",
-    "RIR": "0-2"
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/bicep-training-tips-hypertrophy/"
   },
   {
     "Muscle": "Triceps",
@@ -101,7 +131,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "18+",
     "Freq": "2-4 x Week",
     "Reps": "8-20",
-    "RIR": "0-2"
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/triceps-hypertrophy-training-tips/"
   },
   {
     "Muscle": "Calves",
@@ -111,7 +142,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "20+",
     "Freq": "2-4 x Week",
     "Reps": "8-20",
-    "RIR": "0-2"
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/calves-training-tips-hypertrophy/"
   },
   {
     "Muscle": "Abs",
@@ -121,7 +153,30 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     'MRV': "25+",
     "Freq": "2-6 x Week",
     "Reps": "8-20",
-    "RIR": "0-2"
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/ab-training/"
+  },
+  {
+    "Muscle": "Traps",
+    'MV': "0",
+    'MEV': "1-15",
+    'MAV': "16-20",
+    'MRV': "25+",
+    "Freq": "2-6 x Week",
+    "Reps": "8-20",
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/trap-training-tips-hypertrophy/"
+  },
+  {
+    "Muscle": "Forearms",
+    'MV': "0",
+    'MEV': "1-15",
+    'MAV': "16-20",
+    'MRV': "25+",
+    "Freq": "2-6 x Week",
+    "Reps": "8-20",
+    "RIR": "0-2",
+    "url": "https://renaissanceperiodization.com/expert-advice/forearm-growth-training-tips"
   }
 ];
 
@@ -161,6 +216,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
    * Reference to the query param subscription.
    */
   queryParamSubscriptionRef: Subscription = null;
+
+  chartOptions = {
+    responsive: true
+  }
+  chartData = [
+    { data: [330, 600, 260, 700], label: 'Account A' },
+    { data: [120, 455, 100, 340], label: 'Account B' },
+    { data: [45, 67, 800, 500], label: 'Account C' }
+  ];
+  chartLabels = ['January', 'February', 'Mars', 'April'];
 
   /**
    * @ignore 

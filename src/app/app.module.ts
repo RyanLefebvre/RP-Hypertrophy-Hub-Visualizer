@@ -8,6 +8,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AboutDialogComponent } from './components/about-dialog/about-dialog.component';
 import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
+import { ChartsModule, ThemeService } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -22,8 +24,9 @@ import { ShareDialogComponent } from './components/share-dialog/share-dialog.com
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ChartsModule
   ],
-  providers: [],
+  providers: [ThemeService],
   entryComponents: [AboutDialogComponent, ShareDialogComponent],
   bootstrap: [AppComponent]
 })
