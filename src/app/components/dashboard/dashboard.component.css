@@ -87,7 +87,7 @@ th {
     cursor: pointer;
 }
 
-.mat-row:hover td,
+.allowHighlightIfNoSelected .mat-row:hover td,
 .rpHoverColor:hover {
     color: var(--rp-color);
     cursor: pointer;
@@ -106,9 +106,6 @@ th {
 }
 
 .graphContainer {
-    color: green;
-    border-width: 1px;
-    border-style: solid;
     width: 100%;
     flex-basis: 60%;
     flex-grow: 1;

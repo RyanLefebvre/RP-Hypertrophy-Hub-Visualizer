@@ -20,7 +20,8 @@
             that muscle group.
         </div>
         <div class="tableDescription" *ngIf="!noMuscleGroupSelected()">
-            Here is a link to more detailed recommendations: <a href="{{this.selectedMuscleGroup.url}}" target="_blank">{{this.selectedMuscleGroup.Muscle}} Training Guide</a>
+            Here is a link to more detailed recommendations: <a href="{{this.selectedMuscleGroup.url}}"
+                target="_blank">{{this.selectedMuscleGroup.Muscle}} Training Guide</a>
         </div>
     </mat-card>
     <div class="landmarkTable" [ngClass]="{'allowHighlightIfNoSelected':noMuscleGroupSelected()}">
@@ -64,14 +65,8 @@
     </div>
     <div *ngIf="!noMuscleGroupSelected()" class="flexManager">
         <mat-card class="graphContainer">
-            <canvas
-            baseChart
-            [chartType]="'line'"
-            [datasets]="chartData"
-            [labels]="chartLabels"
-            [options]="chartOptions"
-            [legend]="true"
-            (chartClick)="onChartClick($event)">
+            <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+                [legend]="true" (chartClick)="onChartClick($event)">
             </canvas>
         </mat-card>
         <mat-card class="exercises">

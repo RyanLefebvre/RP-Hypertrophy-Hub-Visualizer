@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NavigationEnd, Router } from '@angular/router';
+import { listenerCount } from 'process';
 import { Subscription } from 'rxjs';
 import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
@@ -217,15 +218,33 @@ export class DashboardComponent implements OnInit, OnDestroy {
    */
   queryParamSubscriptionRef: Subscription = null;
 
-  chartOptions = {
-    responsive: true
+  /**
+   * Chart options used to configure the Chart.js canvas element.
+   */
+  chartOptions: any = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        },
+        scaleLabel: {
+          display: true,
+          labelString: "Sets per week"
+        }
+      }]
+    }
   }
-  chartData = [
-    { data: [330, 600, 260, 700], label: 'Account A' },
-    { data: [120, 455, 100, 340], label: 'Account B' },
-    { data: [45, 67, 800, 500], label: 'Account C' }
-  ];
-  chartLabels = ['January', 'February', 'Mars', 'April'];
+
+  /**
+   * Data passed to the Chart.js canvas object.
+   */
+  chartData: any[] = [];
+
+  /**
+   * Contains the x-axis labels for the Chart.js canvas element.
+   */
+  chartLabels: string[] = [];
 
   /**
    * @ignore 
@@ -292,8 +311,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
    * @param muscleGroup Muscle group to navigate to the in depth display for.
    */
   setSelectedMuscleGroup(muscleGroup: VolumeLandmark): void {
-    this.selectedMuscleGroup = muscleGroup;
+    this.setChartFromMuscleGroup(muscleGroup);
     this.dataSource = [muscleGroup];
+    this.selectedMuscleGroup = muscleGroup;
   }
 
   /**
@@ -347,6 +367,52 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.goBackToDashBoard();
       }
     });
+  }
+
+  /**
+   * Converts the volume recommendations for a muscle group into 
+   * data that can be displayed on the volume bar chart.
+   */
+  setChartFromMuscleGroup(muscleGroup: VolumeLandmark): void {
+    const defaultChartLabels: string[] = ["MV", "MEV", "MAV", "MRV"];
+    let actualChartLabels: string[] = [];
+    const dataTitle: string = (muscleGroup.Muscle + " Volume");
+    const volumeData: number[] = [];
+    const muscleGroupChartData: any = {
+      label: dataTitle,
+      data: volumeData,
+      backgroundColor: "#ee2d37",
+      hoverBackgroundColor: "#b1232a",
+    }
+    defaultChartLabels.forEach((label: string) => {
+      actualChartLabels.push(label);
+      const volumeRecommendation: string = muscleGroup[label];
+      const isRange: boolean = volumeRecommendation.includes("-");
+      if (isRange) {
+        const splitRecommendation: string[] = volumeRecommendation.split("-");
+        const minVolumeRange: number = parseInt(splitRecommendation[0]);
+        const maxVolumeRange: number = parseInt(splitRecommendation[1]);
+        volumeData.push(minVolumeRange);
+        volumeData.push(maxVolumeRange);
+        const deepCopyOfLabel: string = (label + " ").trim();
+        const labelIdx: number = actualChartLabels.indexOf(label);
+        actualChartLabels[labelIdx] = "Min " + deepCopyOfLabel;
+        actualChartLabels.push("Max " + deepCopyOfLabel);
+      }
+      else {
+        volumeData.push(parseInt(volumeRecommendation));
+      }
+    });
+    const volumeDataAsLine = {
+      type: "line",
+      fill: false,
+      label: "Volume Curve",
+      order: 1,
+      data: volumeData
+    }
+    console.log(volumeDataAsLine)
+    this.chartData = [muscleGroupChartData, volumeDataAsLine];
+    this.chartLabels = actualChartLabels;
   }
 
 }
