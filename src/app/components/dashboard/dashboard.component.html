@@ -64,8 +64,7 @@
     </div>
     <div *ngIf="!noMuscleGroupSelected()" class="flexManager">
         <mat-card class="graphContainer">
-            <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
-                [legend]="true" (chartClick)="onChartClick($event)">
+            <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [legend]="true">
             </canvas>
         </mat-card>
         <mat-card class="exercises">
