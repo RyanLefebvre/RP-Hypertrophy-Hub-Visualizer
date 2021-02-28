@@ -9,6 +9,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AboutDialogComponent } from './components/about-dialog/about-dialog.component';
 import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
 import { ChartsModule, ThemeService } from 'ng2-charts';
+import { SafePipeModule } from 'safe-pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ChartsModule, ThemeService } from 'ng2-charts';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ChartsModule
+    ChartsModule,
+    SafePipeModule
   ],
   providers: [ThemeService],
   entryComponents: [AboutDialogComponent, ShareDialogComponent],

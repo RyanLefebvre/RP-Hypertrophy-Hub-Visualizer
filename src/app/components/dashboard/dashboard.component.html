@@ -3,9 +3,8 @@
         <div class="pageTitleHolder">
             <h2 class="tableHeader" *ngIf="noMuscleGroupSelected()">Hypertrophy Training Landmarks</h2>
             <h2 class="tableHeader" *ngIf="!(noMuscleGroupSelected())">
-                <mat-icon class="rpHoverColor greyColor" (click)="goBackToDashBoard()">keyboard_backspace</mat-icon>
-                &nbsp;{{this.selectedMuscleGroup.Muscle}}
-                Training Landmarks
+                <mat-icon class="rpHoverColor greyColor" (click)="goBackToDashBoard()">keyboard_backspace</mat-icon><br>
+                {{this.selectedMuscleGroup.Muscle}} Training Landmarks
             </h2>
             <button (click)="openShareDialog()" class="rpHoverText shareButton greyColor">
                 Share<mat-icon>share</mat-icon>
@@ -20,7 +19,7 @@
             that muscle group.
         </div>
         <div class="tableDescription" *ngIf="!noMuscleGroupSelected()">
-            Here is a link to more detailed recommendations: <a href="{{this.selectedMuscleGroup.url}}"
+            Here is a link to the official RP documentation for this muscle group: <a href="{{this.selectedMuscleGroup.url}}"
                 target="_blank">{{this.selectedMuscleGroup.Muscle}} Training Guide</a>
         </div>
     </mat-card>
@@ -70,7 +69,13 @@
             </canvas>
         </mat-card>
         <mat-card class="exercises">
-            myExercises
+            <div class="exerciseListContainer">
+                <div *ngFor="let exercise of this.selectedMuscleGroup.exercises" class="exercise">
+                    <div class="exerciseFrameContainer">
+                        <iframe id="player" type="text/html" [src]="exercise | safe: 'resourceUrl'" frameborder="0" class="exerciseFrame" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
         </mat-card>
     </div>
     <div class="disclaimer">

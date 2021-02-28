@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
-import { listenerCount } from 'process';
 import { Subscription } from 'rxjs';
 import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
@@ -17,7 +17,8 @@ export interface VolumeLandmark {
   "Freq": string,
   "Reps": string,
   "RIR": string,
-  "url": string
+  "url": string,
+  "exercises": any[]
 };
 
 /**
@@ -34,7 +35,41 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-4 x Week",
     "Reps": "4-20",
     "RIR": "1-3",
-    "url": "https://renaissanceperiodization.com/back-training-tips-hypertrophy/"
+    "url": "https://renaissanceperiodization.com/back-training-tips-hypertrophy/",
+    "exercises": [
+      "https://youtube.com/embed/6FZHJGzMFEc",
+      "https://youtube.com/embed/jiowkUMomlw",
+      "https://youtube.com/embed/UPGuwx7GQ9s",
+      "https://youtube.com/embed/H260SUUyJBM",
+      "https://youtube.com/embed/3QcJggd_L24",
+      "https://youtube.com/embed/0UBRfiO4zDs",
+      "https://youtube.com/embed/_FrrYQxA6kc",
+      "https://youtube.com/embed/yPis7nlbqdY",
+      "https://youtube.com/embed/tZUYS7X50so",
+      "https://youtube.com/embed/5PoEksoJNaw",
+      "https://youtube.com/embed/DMo3HJoawrU",
+      "https://youtube.com/embed/opjbouBmUWg",
+      "https://youtube.com/embed/KOaCM1HMwU0",
+      "https://youtube.com/embed/4H2ItXwUTp8",
+      "https://youtube.com/embed/UCXxvVItLoM",
+      "https://youtube.com/embed/G9uNaXGTJ4w",
+      "https://youtube.com/embed/oxpAl14EYyc",
+      "https://youtube.com/embed/jQjWlIwG4sI",
+      "https://youtube.com/embed/gg5hwJuv6KI",
+      "https://youtube.com/embed/GRHLNfmr_oI",
+      "https://youtube.com/embed/VprlTxpB1rk",
+      "https://youtube.com/embed/--utaPT7XYQ",
+      "https://youtube.com/embed/YCKPD4BSD2E",
+      "https://youtube.com/embed/EUIri47Epcg",
+      "https://youtube.com/embed/L4ChTwrXTjc",
+      "https://youtube.com/embed/GdsRZAeeDUc",
+      "https://youtube.com/embed/0tiC6RUZL8Y",
+      "https://youtube.com/embed/8ygapPMYK1I",
+      "https://youtube.com/embed/9JC1EwqezGY",
+      "https://youtube.com/embed/XWt6FQAK5wM",
+      "https://youtube.com/embed/GRgWPT9XSQQ",
+      "https://youtube.com/embed/iWpoegdfgtc"
+    ]
   },
   {
     "Muscle": "Quads",
@@ -45,7 +80,18 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "1-3 x Week",
     "Reps": "6-20",
     "RIR": "1-3",
-    "url": "https://renaissanceperiodization.com/expert-advice/quad-size-training-tips"
+    "url": "https://renaissanceperiodization.com/expert-advice/quad-size-training-tips",
+    "exercises": [
+      "https://youtube.com/embed/-eO_VydErV0",
+      "https://youtube.com/embed/0DQvn2qsOG4",
+      "https://youtube.com/embed/HHxNbhP16UE",
+      "https://youtube.com/embed/rYgNArpwE7E",
+      "https://youtube.com/embed/i7J5h7BJ07g",
+      "https://youtube.com/embed/m0FOpMEgero",
+      "https://youtube.com/embed/yZmx_Ac3880",
+      "https://youtube.com/embed/1IIPcUCKxcE",
+      "https://youtube.com/embed/L__-j2v_LPM"
+    ]
   },
   {
     "Muscle": "Hamstrings",
@@ -56,7 +102,18 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-3 x Week",
     "Reps": "6-20",
     "RIR": "1-3",
-    "url": "https://renaissanceperiodization.com/expert-advice/hamstring-size-training-tips"
+    "url": "https://renaissanceperiodization.com/expert-advice/hamstring-size-training-tips",
+    "exercises": [
+      "https://youtube.com/embed/5_ejbGfdAQE",
+      "https://youtube.com/embed/cYKYGwcg0U8",
+      "https://youtube.com/embed/SBGYSfoqyfU",
+      "https://youtube.com/embed/dEJ0FTm-CEk",
+      "https://youtube.com/embed/mnxn-7SO9Ks",
+      "https://youtube.com/embed/n5WDXD_mpVY",
+      "https://youtube.com/embed/Orxowest56U",
+      "https://youtube.com/embed/N6FVnaasdq0",
+      "https://youtube.com/embed/CN_7cz3P-1U"
+    ]
   },
   {
     "Muscle": "Glutes",
@@ -67,7 +124,29 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-3 x Week",
     "Reps": "6-20",
     "RIR": "1-3",
-    "url": "https://renaissanceperiodization.com/glute-training-tips-hypertrophy/"
+    "url": "https://renaissanceperiodization.com/glute-training-tips-hypertrophy/",
+    "exercises": [
+      "https://youtube.com/embed/EF7jXP17DPE",
+      "https://youtube.com/embed/_meXEWq5MOQ",
+      "https://youtube.com/embed/pv8e6OSyETE",
+      "https://youtube.com/embed/AweC3UaM14o",
+      "https://youtube.com/embed/kvWcDHH62j0",
+      "https://youtube.com/embed/X-uKkAukJVA",
+      "https://youtube.com/embed/eFWCn5iEbTU",
+      "https://youtube.com/embed/NLDBFtSNhqg",
+      "https://youtube.com/embed/ZSPmIyX9RZs",
+      "https://youtube.com/embed/TQfhY5oJ_Sc",
+      "https://youtube.com/embed/lzDgRRuBdqY",
+      "https://youtube.com/embed/jNihW0WDIL4",
+      "https://youtube.com/embed/pfSMst14EFk",
+      "https://youtube.com/embed/bnYekgCKfv0",
+      "https://youtube.com/embed/4eDJa5MnAmY",
+      "https://youtube.com/embed/v709aJKv-gM",
+      "https://youtube.com/embed/D-c2CWwEweo",
+      "https://youtube.com/embed/pjAewD4LxXs",
+      "https://youtube.com/embed/CSXVj047Ss4",
+      "https://youtube.com/embed/LU2GYsqkgAQ"
+    ]
   },
   {
     "Muscle": "Chest",
@@ -78,7 +157,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-4 x Week",
     "Reps": "4-20",
     "RIR": "1-3",
-    "url": "https://renaissanceperiodization.com/chest-training-tips-hypertrophy/"
+    "url": "https://renaissanceperiodization.com/chest-training-tips-hypertrophy/",
+    "exercises": []
   },
   {
     "Muscle": "Front-Delts",
@@ -89,7 +169,19 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-6 x Week",
     "Reps": "8-20",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/front-delt-training-tips-hypertrophy/"
+    "url": "https://renaissanceperiodization.com/front-delt-training-tips-hypertrophy/",
+    "exercises": [
+      "https://youtube.com/embed/_ikCPws1mbE",
+      "https://youtube.com/embed/yIoAcMD3jcE",
+      "https://youtube.com/embed/hRJ6tR5-if0",
+      "https://youtube.com/embed/87pZAbYjXc4",
+      "https://youtube.com/embed/WvLMauqrnK8",
+      "https://youtube.com/embed/IuzRCN6eG6Y",
+      "https://youtube.com/embed/HzIiNhHhhtA",
+      "https://youtube.com/embed/OLqZDUUD2b0",
+      "https://youtube.com/embed/G2qpTG1Eh40",
+      "https://youtube.com/embed/Raemd3qWgJc"
+    ]
   },
   {
     "Muscle": "Side-Delts",
@@ -100,7 +192,19 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-6 x Week",
     "Reps": "8-20",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/expert-advice/side-delt-size-training-tips"
+    "url": "https://renaissanceperiodization.com/expert-advice/side-delt-size-training-tips",
+    "exercises": [
+      "https://youtube.com/embed/um3VVzqunPU",
+      "https://youtube.com/embed/2OMbdPF7mz4",
+      "https://youtube.com/embed/qr3ziolhjvQ",
+      "https://youtube.com/embed/Ub6QruNKfbY",
+      "https://youtube.com/embed/OuG1smZTsQQ",
+      "https://youtube.com/embed/lq7eLC30b9w",
+      "https://youtube.com/embed/0o07iGKUarI",
+      "https://youtube.com/embed/QIpa-9dtkgA",
+      "https://youtube.com/embed/D1f7d1OcobY",
+      "https://youtube.com/embed/SKf8wHlIFX0"
+    ]
   },
   {
     "Muscle": "Rear-Delts",
@@ -111,7 +215,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-6 x Week",
     "Reps": "8-20",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/expert-advice/rear-delt-size-training-tips"
+    "url": "https://renaissanceperiodization.com/expert-advice/rear-delt-size-training-tips",
+    "exercises": []
   },
   {
     "Muscle": "Biceps",
@@ -122,7 +227,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-6 x Week",
     "Reps": "8-15",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/bicep-training-tips-hypertrophy/"
+    "url": "https://renaissanceperiodization.com/bicep-training-tips-hypertrophy/",
+    "exercises": []
   },
   {
     "Muscle": "Triceps",
@@ -133,7 +239,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-4 x Week",
     "Reps": "8-20",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/triceps-hypertrophy-training-tips/"
+    "url": "https://renaissanceperiodization.com/triceps-hypertrophy-training-tips/",
+    "exercises": []
   },
   {
     "Muscle": "Calves",
@@ -144,7 +251,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-4 x Week",
     "Reps": "8-20",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/calves-training-tips-hypertrophy/"
+    "url": "https://renaissanceperiodization.com/calves-training-tips-hypertrophy/",
+    "exercises": []
   },
   {
     "Muscle": "Abs",
@@ -155,7 +263,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-6 x Week",
     "Reps": "8-20",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/ab-training/"
+    "url": "https://renaissanceperiodization.com/ab-training/",
+    "exercises": []
   },
   {
     "Muscle": "Traps",
@@ -166,7 +275,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-6 x Week",
     "Reps": "8-20",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/trap-training-tips-hypertrophy/"
+    "url": "https://renaissanceperiodization.com/trap-training-tips-hypertrophy/",
+    "exercises": []
   },
   {
     "Muscle": "Forearms",
@@ -177,7 +287,8 @@ const VOLUME_LANDMARKS: VolumeLandmark[] = [
     "Freq": "2-6 x Week",
     "Reps": "8-20",
     "RIR": "0-2",
-    "url": "https://renaissanceperiodization.com/expert-advice/forearm-growth-training-tips"
+    "url": "https://renaissanceperiodization.com/expert-advice/forearm-growth-training-tips",
+    "exercises": []
   }
 ];
 
@@ -249,7 +360,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   /**
    * @ignore 
    */
-  constructor(public dialog: MatDialog, public router: Router) { }
+  constructor(
+    public sanitizer: DomSanitizer,
+    public dialog: MatDialog,
+    public router: Router) { }
 
   /**
   * Creates subscription.
@@ -410,7 +524,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       order: 1,
       data: volumeData
     }
-    console.log(volumeDataAsLine)
     this.chartData = [muscleGroupChartData, volumeDataAsLine];
     this.chartLabels = actualChartLabels;
   }
