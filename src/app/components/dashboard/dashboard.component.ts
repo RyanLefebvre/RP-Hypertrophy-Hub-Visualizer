@@ -511,6 +511,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     const fullRoutePath: string = (origin + musclePath);
     window.location.href = fullRoutePath;
+    window.scrollTo(0, 0);
   }
 
   /**
