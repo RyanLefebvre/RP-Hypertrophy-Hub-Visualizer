@@ -16,11 +16,13 @@
             <a href="https://renaissanceperiodization.com/training-volume-landmarks-muscle-growth/" target="_blank"
                 class="rpThemeText">article</a>,
             otherwise this tool wont make sense. Click on a row in the table to view the in-depth recommendations for
-            that muscle group.
+            that muscle group. The units for the cells in the following table is <span class="italic">sets per
+                week</span>.
         </div>
         <div class="tableDescription" *ngIf="!noMuscleGroupSelected()">
-            Here is a link to the official RP documentation for this muscle group: <a href="{{this.selectedMuscleGroup.url}}"
-                target="_blank">{{this.selectedMuscleGroup.Muscle}} Training Guide</a>
+            Here is a link to the official RP documentation for this muscle group: <a
+                href="{{this.selectedMuscleGroup.url}}" target="_blank">{{this.selectedMuscleGroup.Muscle}} Training
+                Guide</a>
         </div>
     </mat-card>
     <div class="landmarkTable" [ngClass]="{'allowHighlightIfNoSelected':noMuscleGroupSelected()}">
@@ -47,15 +49,7 @@
             </ng-container>
             <ng-container matColumnDef="Freq">
                 <th mat-header-cell *matHeaderCellDef> Freq </th>
-                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.MRV}} </td>
-            </ng-container>
-            <ng-container matColumnDef="Reps">
-                <th mat-header-cell *matHeaderCellDef> Reps </th>
-                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.Reps}} </td>
-            </ng-container>
-            <ng-container matColumnDef="RIR">
-                <th mat-header-cell *matHeaderCellDef> RIR </th>
-                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.RIR}} </td>
+                <td mat-cell *matCellDef="let muscleGroup"> {{muscleGroup.Freq}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let muscleGroup; columns: displayedColumns;" (click)="navigateTo(muscleGroup)">
@@ -64,14 +58,16 @@
     </div>
     <div *ngIf="!noMuscleGroupSelected()" class="flexManager">
         <mat-card class="graphContainer">
-            <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [legend]="true">
+            <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+                [legend]="true">
             </canvas>
         </mat-card>
         <mat-card class="exercises">
             <div class="exerciseListContainer">
                 <div *ngFor="let exercise of this.selectedMuscleGroup.exercises" class="exercise">
                     <div class="exerciseFrameContainer">
-                        <iframe id="player" type="text/html" [src]="exercise | safe: 'resourceUrl'" frameborder="0" class="exerciseFrame" allowfullscreen></iframe>
+                        <iframe id="player" type="text/html" [src]="exercise | safe: 'resourceUrl'" frameborder="0"
+                            class="exerciseFrame" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
